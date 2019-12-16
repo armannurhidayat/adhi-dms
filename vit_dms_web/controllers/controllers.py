@@ -54,15 +54,8 @@ class VitDmsWeb(http.Controller):
         return simplejson.dumps(data)
 
 
-#     @http.route('/vit_dms_web/vit_dms_web/objects/', auth='public')
-#     def list(self, **kw):
-#         return http.request.render('vit_dms_web.listing', {
-#             'root': '/vit_dms_web/vit_dms_web',
-#             'objects': http.request.env['vit_dms_web.vit_dms_web'].search([]),
-#         })
-
-#     @http.route('/vit_dms_web/vit_dms_web/objects/<model("vit_dms_web.vit_dms_web"):obj>/', auth='public')
-#     def object(self, obj, **kw):
-#         return http.request.render('vit_dms_web.object', {
-#             'object': obj
-#         })
+    @http.route('/vit_dms_web/reviews/read', auth='public', csrf=False)
+    def review_read(self, **kw):
+        domain=[]
+        reviews = http.request.env['muk_dms.review'].search_read(domain)
+        return simplejson.dumps(reviews)

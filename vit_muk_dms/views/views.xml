@@ -24,6 +24,7 @@
 									<field name="tanggal_jam"/>
 									<field name="redaksi_asal"/>
 									<field name="ulas"/>
+									<field name="user_id"/>
 								</tree>
 							</field>
 						</group>

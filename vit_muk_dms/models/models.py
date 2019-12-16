@@ -17,9 +17,9 @@ class muk_dms(models.Model):
 	state = fields.Selection(selection=SESSION_STATES, string="State", required=False,
 						readonly=True,
 						default=SESSION_STATES[0][0], help="")
-	review_ids = fields.One2many('muk_dms.review','review_id', string='Review')
-	reviewer_ids = fields.One2many('muk_dms.reviewer','reviewer_id', string='Reviewer')
-	info_ids = fields.One2many('muk_dms.info','info_id', string='Info')
+	review_ids = fields.One2many('muk_dms.review','file_id', string='Review')
+	reviewer_ids = fields.One2many('muk_dms.reviewer','file_id', string='Reviewer')
+	info_ids = fields.One2many('muk_dms.info','file_id', string='Info')
 
 	@api.multi
 	def action_draft(self):
@@ -36,14 +36,15 @@ class muk_dms_review(models.Model):
 	tanggal_jam = fields.Date(string="Tanggal Jam", default=lambda self: time.strftime("%Y-%m-%d"))
 	redaksi_asal = fields.Char(string="Redaksi Asal",)
 	ulas = fields.Char(string="Ulasan",)
-	review_id = fields.Many2one(comodel_name='muk_dms.file', string='Review')
+	file_id = fields.Many2one(comodel_name='muk_dms.file', string='File')
+	user_id = fields.Many2one(comodel_name="res.users", string="Reviewer", required=False, default=lambda self: self.env.user.id)
 
 class muk_dms_reviewer(models.Model):
 	_name = 'muk_dms.reviewer'
 
 	name = fields.Many2one(comodel_name="res.users", string="User", required=False,
 							default=lambda self: self.env.user.id)
-	reviewer_id = fields.Many2one(comodel_name='muk_dms.file', string='Reviewer')
+	file_id = fields.Many2one(comodel_name='muk_dms.file', string='Reviewer')
 
 class muk_dms_info(models.Model):
 	_name = 'muk_dms.info'
@@ -52,4 +53,4 @@ class muk_dms_info(models.Model):
 	tanggal_naskah = fields.Date(string="Tanggal Naskah", default=lambda self: time.strftime("%Y-%m-%d"))
 	partner = fields.Many2one(comodel_name="res.partner", string="Redaksi Asal")
 	deskripsi = fields.Char(string="Deskripsi Naskah")
-	info_id = fields.Many2one(comodel_name='muk_dms.file', string='Info')
+	file_id = fields.Many2one(comodel_name='muk_dms.file', string='File')

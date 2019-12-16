@@ -11,6 +11,7 @@
                 <link rel="stylesheet" type="text/css" href="/vit_dms_web/static/src/css/themes/icon.css" />
 
                 <script type="text/javascript" src="/vit_dms_web/static/src/js/jquery.easyui.min.js"></script>
+                <script type="text/javascript" src="/vit_dms_web/static/src/js/jquery.edatagrid.js"></script>
             </xpath>
         </template>
     </data>
