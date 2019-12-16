@@ -104,3 +104,6 @@ class VitDmsWeb(http.Controller):
     @http.route('/vit_dms_web/reviews/delete/<int:file_id>', auth='public', csrf=False)
     def review_delete(self, **kw):
         print kw
+        id = kw.get('id')
+        http.request.env['muk_dms.review'].browse(int(id)).unlink()
+        return simplejson.dumps({'success': True})
