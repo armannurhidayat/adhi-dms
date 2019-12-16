@@ -54,16 +54,51 @@ class VitDmsWeb(http.Controller):
         return simplejson.dumps(data)
 
 
-    @http.route('/vit_dms_web/reviews/read', auth='public', csrf=False)
-    def review_read(self, **kw):
+    @http.route('/vit_dms_web/reviews/read/<int:file_id>', auth='public', csrf=False)
+    def review_read(self, file_id, **kw):
         reviews=[]
-
-        if 'file_id' in kw:
-            file_id = kw.get('file_id')
-            domain=[('file_id','=', int(file_id))]
-            reviews = http.request.env['muk_dms.review'].search_read(domain)
+        domain=[('file_id','=', file_id)]
+        reviews = http.request.env['muk_dms.review'].search_read(domain)
         return simplejson.dumps(reviews)
 
     @http.route('/vit_dms_web/reviews/create', auth='public', csrf=False)
     def review_create(self, **kw):
+        print kw
+        isNewRecord = kw.get('isNewRecord')
+        ulas = kw.get('ulas')
+        name = kw.get('name')
+        tanggal_jam = kw.get('tanggal_jam')
+        redaksi_asal = kw.get('redaksi_asal')
+
+        data = {
+            'ulas': ulas,
+            'name': name,
+            'tanggal_jam': tanggal_jam,
+            'redaksi_asal': redaksi_asal
+        }
+        new_id = http.request.env['muk_dms.review'].create(data)
+        data.update({'id': new_id.id})
+        return simplejson.dumps(data)
+
+    @http.route('/vit_dms_web/reviews/update', auth='public', csrf=False)
+    def review_update(self, **kw):
+        print kw
+        isNewRecord = kw.get('isNewRecord')
+        ulas = kw.get('ulas')
+        name = kw.get('name')
+        tanggal_jam = kw.get('tanggal_jam')
+        redaksi_asal = kw.get('redaksi_asal')
+
+        data = {
+            'ulas': ulas,
+            'name': name,
+            'tanggal_jam': tanggal_jam,
+            'redaksi_asal': redaksi_asal
+        }
+        updated_id = http.request.env['muk_dms.review'].write(data)
+        data.update({'id':updated_id})
+        return simplejson.dumps(data)
+
+    @http.route('/vit_dms_web/reviews/delete', auth='public', csrf=False)
+    def review_delete(self, **kw):
         print kw

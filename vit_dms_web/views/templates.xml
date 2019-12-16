@@ -49,8 +49,11 @@
                       this.contentWindow.location.reload(true);
                     });
 
-                    $('#dg').datagrid('load',{
-                        file_id: node.id,
+                    $('#dg').edatagrid({
+                        url: '/vit_dms_web/reviews/read/' + node.id,
+                        saveUrl: '/vit_dms_web/reviews/create/' + node.id,
+                        updateUrl: '/vit_dms_web/reviews/update' + node.id,
+                        destroyUrl: '/vit_dms_web/reviews/delete' + node.id
                     });
                  }
              </script>
@@ -83,10 +86,7 @@
                     <script type="text/javascript">
                         $(function(){
                             $('#dg').edatagrid({
-                                url: '/vit_dms_web/reviews/read',
-                                saveUrl: '/vit_dms_web/reviews/create',
-                                updateUrl: '/vit_dms_web/reviews/update',
-                                destroyUrl: '/vit_dms_web/reviews/delete'
+
                             });
                         });
                     </script>
