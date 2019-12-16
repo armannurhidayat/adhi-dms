@@ -61,8 +61,8 @@ class VitDmsWeb(http.Controller):
         reviews = http.request.env['muk_dms.review'].search_read(domain)
         return simplejson.dumps(reviews)
 
-    @http.route('/vit_dms_web/reviews/create', auth='public', csrf=False)
-    def review_create(self, **kw):
+    @http.route('/vit_dms_web/reviews/create/<int:file_id>', auth='public', csrf=False)
+    def review_create(self, file_id, **kw):
         print kw
         isNewRecord = kw.get('isNewRecord')
         ulas = kw.get('ulas')
@@ -71,6 +71,7 @@ class VitDmsWeb(http.Controller):
         redaksi_asal = kw.get('redaksi_asal')
 
         data = {
+            'file_id':file_id,
             'ulas': ulas,
             'name': name,
             'tanggal_jam': tanggal_jam,
@@ -80,14 +81,15 @@ class VitDmsWeb(http.Controller):
         data.update({'id': new_id.id})
         return simplejson.dumps(data)
 
-    @http.route('/vit_dms_web/reviews/update', auth='public', csrf=False)
-    def review_update(self, **kw):
+    @http.route('/vit_dms_web/reviews/update/<int:file_id>', auth='public', csrf=False)
+    def review_update(self, file_id, **kw):
         print kw
         isNewRecord = kw.get('isNewRecord')
         ulas = kw.get('ulas')
         name = kw.get('name')
         tanggal_jam = kw.get('tanggal_jam')
         redaksi_asal = kw.get('redaksi_asal')
+        id = kw.get('id')
 
         data = {
             'ulas': ulas,
@@ -95,10 +97,10 @@ class VitDmsWeb(http.Controller):
             'tanggal_jam': tanggal_jam,
             'redaksi_asal': redaksi_asal
         }
-        updated_id = http.request.env['muk_dms.review'].write(data)
+        updated_id = http.request.env['muk_dms.review'].browse(int(id)).write(data)
         data.update({'id':updated_id})
         return simplejson.dumps(data)
 
-    @http.route('/vit_dms_web/reviews/delete', auth='public', csrf=False)
+    @http.route('/vit_dms_web/reviews/delete/<int:file_id>', auth='public', csrf=False)
     def review_delete(self, **kw):
         print kw

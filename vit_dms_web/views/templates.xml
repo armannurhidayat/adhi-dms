@@ -52,8 +52,8 @@
                     $('#dg').edatagrid({
                         url: '/vit_dms_web/reviews/read/' + node.id,
                         saveUrl: '/vit_dms_web/reviews/create/' + node.id,
-                        updateUrl: '/vit_dms_web/reviews/update' + node.id,
-                        destroyUrl: '/vit_dms_web/reviews/delete' + node.id
+                        updateUrl: '/vit_dms_web/reviews/update/' + node.id,
+                        destroyUrl: '/vit_dms_web/reviews/delete/' + node.id
                     });
                  }
              </script>
