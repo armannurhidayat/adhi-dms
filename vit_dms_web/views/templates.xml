@@ -1,0 +1,64 @@
+<openerp>
+    <data>
+         <template id="vit_dms_web.index" name="index">
+            <t t-call="website.layout">
+                <h2>Document Management Systems</h2>
+                <p>View, Read, Review</p>
+                <div style="margin:20px 0;"></div>
+                <div class="easyui-layout" style="width:100%;height:1000px;">
+
+                    <div data-options="region:'east',split:true" title="East" style="width:200px;">
+
+                    </div>
+
+                    <div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
+                        <div >
+                            <iframe id="viewer" src="" width='400' height='300' allowfullscreen="1" webkitallowfullscreen="1"></iframe>
+                        </div>
+                    </div>
+
+                    <div data-options="region:'west',split:true" title="West" style="width:300px;">
+                        <table id="tt" class="easyui-treegrid" style="width:100%;height:auto"
+                            data-options="
+                                url: '/vit_dms_web/directories',
+                                method: 'get',
+                                rownumbers: true,
+                                idField: 'id',
+                                treeField: 'name',
+                                onClickRow: onClickRow
+                            ">
+                        <thead>
+                            <tr>
+                                <th data-options="field:'name'" width="220">Name</th>
+                                <th data-options="field:'size'" width="100" align="right">Size</th>
+                                <th data-options="field:'date'" width="150">State</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    </div>
+                </div>
+
+                <script>
+                    function onClickRow(node){
+                        var src = "/vit_dms_web/static/src/js/ViewerJS/index.html#/web/content?model=muk_dms.file&amp;field=content&amp;id=" + node.id ;
+                        console.log(src);
+                        $('#viewer').attr("src", src);
+                    }
+                </script>
+
+
+            </t>
+         </template>
+
+         <template id="vit_dms_web.file">
+           <h1><t t-esc="file.display_name"/></h1>
+           <dl>
+             <t t-foreach="file._fields" t-as="field">
+               <dt><t t-esc="field"/></dt>
+               <dd><t t-esc="file[field]"/></dd>
+             </t>
+           </dl>
+         </template>
+
+    </data>
+</openerp>
