@@ -22,7 +22,7 @@
                                     <th field="tanggal_jam" width="50" editor="{type:'validatebox',options:{required:true}}">Date Time</th>
                                     <th field="name" width="50" editor="{type:'validatebox',options:{required:true}}">Bookmark</th>
                                     <th field="redaksi_asal" width="50" editor="{type:'validatebox',options:{required:true}}">Phone</th>
-                                    <th field="ulas" width="50" editor="{type:'validatebox',options:{required:true,validType:'email'}}">Email</th>
+                                    <th field="ulas" width="50" editor="{type:'validatebox',options:{required:true}}">Email</th>
                                 </tr>
                             </thead>
                         </table>
@@ -73,6 +73,10 @@
                         $('#viewer').attr('src', src);
                         $('iframe').each(function() {
                           this.contentWindow.location.reload(true);
+                        });
+
+                        $('#dg').datagrid('load',{
+                            file_id: node.id,
                         });
                     }
 

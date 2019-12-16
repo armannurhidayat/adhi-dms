@@ -56,6 +56,10 @@ class VitDmsWeb(http.Controller):
 
     @http.route('/vit_dms_web/reviews/read', auth='public', csrf=False)
     def review_read(self, **kw):
-        domain=[]
-        reviews = http.request.env['muk_dms.review'].search_read(domain)
+        reviews=[]
+
+        if 'file_id' in kw:
+            file_id = kw.get('file_id')
+            domain=[('file_id','=', int(file_id))]
+            reviews = http.request.env['muk_dms.review'].search_read(domain)
         return simplejson.dumps(reviews)
