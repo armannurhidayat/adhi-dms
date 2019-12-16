@@ -21,8 +21,8 @@
                                 <tr>
                                     <th field="tanggal_jam" width="50" editor="{type:'validatebox',options:{required:true}}">Date Time</th>
                                     <th field="name" width="50" editor="{type:'validatebox',options:{required:true}}">Bookmark</th>
-                                    <th field="redaksi_asal" width="50" editor="{type:'validatebox',options:{required:true}}">Phone</th>
-                                    <th field="ulas" width="50" editor="{type:'validatebox',options:{required:true}}">Email</th>
+                                    <th field="redaksi_asal" width="50" editor="{type:'validatebox',options:{required:true}}">Redaksi Asal</th>
+                                    <th field="ulas" width="50" editor="{type:'validatebox',options:{required:true}}">Ulasan</th>
                                 </tr>
                             </thead>
                         </table>
