@@ -16,32 +16,45 @@
                             <iframe id="viewer" src="" width='100%' height='500' allowfullscreen="1" webkitallowfullscreen="1"></iframe>
                         </div>
 
-                        <table id="dg" title="Reviews" style="width:100%;height:250px" toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
-                            <thead>
-                                <tr>
-                                    <th field="tanggal_jam" width="50" editor="{type:'validatebox',options:{required:true}}">Date Time</th>
-                                    <th field="name" width="50" editor="{type:'validatebox',options:{required:true}}">Bookmark</th>
-                                    <th field="redaksi_asal" width="50" editor="{type:'validatebox',options:{required:true}}">Redaksi Asal</th>
-                                    <th field="ulas" width="50" editor="{type:'validatebox',options:{required:true}}">Ulasan</th>
-                                </tr>
-                            </thead>
-                        </table>
-                        <div id="toolbar">
-                            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#dg').edatagrid('addRow')">New</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Destroy</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Save</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancel</a>
+                        <div class="easyui-tabs" style="width:100%;height:300px">
+
+                            <div title="Reviews" style="padding:10px">
+                                <table id="dg" title="Reviews" style="width:100%;height:250px" toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
+                                    <thead>
+                                        <tr>
+                                            <th field="tanggal_jam" width="50" editor="{type:'validatebox',options:{required:true}}">Date Time</th>
+                                            <th field="name" width="50" editor="{type:'validatebox',options:{required:true}}">Bookmark</th>
+                                            <th field="redaksi_asal" width="50" editor="{type:'validatebox',options:{required:true}}">Redaksi Asal</th>
+                                            <th field="ulas" width="50" editor="{type:'validatebox',options:{required:true}}">Ulasan</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <div id="toolbar">
+                                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#dg').edatagrid('addRow')">New</a>
+                                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Destroy</a>
+                                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Save</a>
+                                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancel</a>
+                                </div>
+                                <script type="text/javascript">
+                                    $(function(){
+                                        $('#dg').edatagrid({
+                                            url: '/vit_dms_web/reviews/read',
+                                            saveUrl: '/vit_dms_web/reviews/create',
+                                            updateUrl: '/vit_dms_web/reviews/update',
+                                            destroyUrl: '/vit_dms_web/reviews/delete'
+                                        });
+                                    });
+                                </script>
+                            </div>
+
+                            <div title="Reviewers" style="padding:10px">
+
+                            </div>
+                            <div title="Info" data-options="iconCls:'icon-help'" style="padding:10px">
+
+                            </div>
                         </div>
-                        <script type="text/javascript">
-                            $(function(){
-                                $('#dg').edatagrid({
-                                    url: '/vit_dms_web/reviews/read',
-                                    saveUrl: '/vit_dms_web/reviews/create',
-                                    updateUrl: '/vit_dms_web/reviews/update',
-                                    destroyUrl: '/vit_dms_web/reviews/delete'
-                                });
-                            });
-                        </script>
+
                     </div>
 
                     <div data-options="region:'west',split:true" title="File Browser" style="width:300px;">
