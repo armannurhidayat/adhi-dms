@@ -40,10 +40,13 @@
 
                 <script>
                     function onClickRow(node){
-                        var src = "/vit_dms_web/static/src/js/ViewerJS/index.html#/web/content?model=muk_dms.file&amp;field=content&amp;id=" + node.id ;
-                        console.log(src);
-                        $('#viewer').attr("src", src);
+                        var src = '/vit_dms_web/static/src/js/ViewerJS/index.html#/web/content?model=muk_dms.file&amp;field=content&amp;id=' + node.id ;
+                        $('#viewer').attr('src', src);
+                        $('iframe').each(function() {
+                          this.contentWindow.location.reload(true);
+                        });
                     }
+
                 </script>
 
 
