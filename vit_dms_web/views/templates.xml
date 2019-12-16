@@ -7,58 +7,24 @@
                 <div style="margin:20px 0;"></div>
                 <div class="easyui-layout" style="width:100%;height:1000px;">
 
-                    <div data-options="region:'east',split:true" title="Info" style="width:200px;">
-                        Info
+                    <div data-options="region:'west',split:true" title="File Browser" style="width:300px;">
+                        <t t-call="vit_dms_web.file_browser"/>
                     </div>
 
                     <div data-options="region:'center',title:'Document',iconCls:'icon-ok'">
-                        <div >
-                            <iframe id="viewer" src="" width='100%' height='500' allowfullscreen="1" webkitallowfullscreen="1"></iframe>
-                        </div>
-
-                        <div class="easyui-tabs" style="width:100%;height:300px">
-
-                            <div title="Reviews" style="padding:10px">
-                                <table id="dg" title="Reviews" style="width:100%;height:250px" toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
-                                    <thead>
-                                        <tr>
-                                            <th field="tanggal_jam" width="50" editor="{type:'validatebox',options:{required:true}}">Date Time</th>
-                                            <th field="name" width="50" editor="{type:'validatebox',options:{required:true}}">Bookmark</th>
-                                            <th field="redaksi_asal" width="50" editor="{type:'validatebox',options:{required:true}}">Redaksi Asal</th>
-                                            <th field="ulas" width="50" editor="{type:'validatebox',options:{required:true}}">Ulasan</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                                <div id="toolbar">
-                                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#dg').edatagrid('addRow')">New</a>
-                                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Destroy</a>
-                                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Save</a>
-                                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancel</a>
-                                </div>
-                                <script type="text/javascript">
-                                    $(function(){
-                                        $('#dg').edatagrid({
-                                            url: '/vit_dms_web/reviews/read',
-                                            saveUrl: '/vit_dms_web/reviews/create',
-                                            updateUrl: '/vit_dms_web/reviews/update',
-                                            destroyUrl: '/vit_dms_web/reviews/delete'
-                                        });
-                                    });
-                                </script>
-                            </div>
-
-                            <div title="Reviewers" style="padding:10px">
-
-                            </div>
-                            <div title="Info" data-options="iconCls:'icon-help'" style="padding:10px">
-
-                            </div>
-                        </div>
-
+                        <t t-call="vit_dms_web.file_preview"/>
+                        <t t-call="vit_dms_web.file_review"/>
                     </div>
 
-                    <div data-options="region:'west',split:true" title="File Browser" style="width:300px;">
-                        <table id="tt" class="easyui-treegrid" style="width:100%;height:auto"
+                    <div data-options="region:'east',split:true" title="Info" style="width:200px;">
+                        <t t-call="vit_dms_web.file_info"/>
+                    </div>
+                </div>
+            </t>
+         </template>
+
+         <template id="vit_dms_web.file_browser">
+             <table id="tt" class="easyui-treegrid" style="width:100%;height:auto"
                             data-options="
                                 url: '/vit_dms_web/directories',
                                 method: 'get',
@@ -75,39 +41,68 @@
                                 </tr>
                             </thead>
                         </table>
+             <script>
+                 function onClickRow(node){
+                    var src = '/vit_dms_web/static/src/js/ViewerJS/index.html#/web/content?model=muk_dms.file&amp;field=content&amp;id=' + node.id ;
+                    $('#viewer').attr('src', src);
+                    $('iframe').each(function() {
+                      this.contentWindow.location.reload(true);
+                    });
 
+                    $('#dg').datagrid('load',{
+                        file_id: node.id,
+                    });
+                 }
+             </script>
+         </template>
 
+        <template id="vit_dms_web.file_preview">
+            <iframe id="viewer" src="" width='100%' height='500' allowfullscreen="1" webkitallowfullscreen="1"></iframe>
+        </template>
+
+        <template id="vit_dms_web.file_review">
+            <div class="easyui-tabs" style="width:100%;height:300px">
+
+                <div title="Reviews" style="padding:10px">
+                    <table id="dg" title="Reviews" style="width:100%;height:250px" toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
+                        <thead>
+                            <tr>
+                                <th field="tanggal_jam" width="50" editor="{type:'validatebox',options:{required:true}}">Date Time</th>
+                                <th field="name" width="50" editor="{type:'validatebox',options:{required:true}}">Bookmark</th>
+                                <th field="redaksi_asal" width="50" editor="{type:'validatebox',options:{required:true}}">Redaksi Asal</th>
+                                <th field="ulas" width="50" editor="{type:'validatebox',options:{required:true}}">Ulasan</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div id="toolbar">
+                        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#dg').edatagrid('addRow')">New</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Destroy</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Save</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancel</a>
                     </div>
+                    <script type="text/javascript">
+                        $(function(){
+                            $('#dg').edatagrid({
+                                url: '/vit_dms_web/reviews/read',
+                                saveUrl: '/vit_dms_web/reviews/create',
+                                updateUrl: '/vit_dms_web/reviews/update',
+                                destroyUrl: '/vit_dms_web/reviews/delete'
+                            });
+                        });
+                    </script>
                 </div>
 
-                <script>
-                    function onClickRow(node){
-                        var src = '/vit_dms_web/static/src/js/ViewerJS/index.html#/web/content?model=muk_dms.file&amp;field=content&amp;id=' + node.id ;
-                        $('#viewer').attr('src', src);
-                        $('iframe').each(function() {
-                          this.contentWindow.location.reload(true);
-                        });
+                <div title="Reviewers" style="padding:10px">
+                </div>
 
-                        $('#dg').datagrid('load',{
-                            file_id: node.id,
-                        });
-                    }
+                <div title="Info" data-options="iconCls:'icon-help'" style="padding:10px">
+                </div>
+            </div>
+        </template>
 
-                </script>
-
-
-            </t>
-         </template>
-
-         <template id="vit_dms_web.file">
-           <h1><t t-esc="file.display_name"/></h1>
-           <dl>
-             <t t-foreach="file._fields" t-as="field">
-               <dt><t t-esc="field"/></dt>
-               <dd><t t-esc="file[field]"/></dd>
-             </t>
-           </dl>
-         </template>
+        <template id="vit_dms_web.file_info">
+            Info
+        </template>
 
     </data>
 </openerp>
