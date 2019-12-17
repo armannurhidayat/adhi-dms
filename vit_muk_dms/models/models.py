@@ -44,6 +44,9 @@ class muk_dms_reviewer(models.Model):
 
 	name = fields.Many2one(comodel_name="res.users", string="User", required=False,
 							default=lambda self: self.env.user.id)
+	state = fields.Selection(string="State", selection=SESSION_STATES, required=False, default='draft' )
+	date = fields.Date(string="Review Date", required=False, default=fields.Datetime.now() )
+
 	file_id = fields.Many2one(comodel_name='muk_dms.file', string='Reviewer')
 
 class muk_dms_info(models.Model):

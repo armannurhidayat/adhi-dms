@@ -61,6 +61,9 @@
                         updateUrl: '/vit_dms_web/infos/update/' + node.id,
                         destroyUrl: '/vit_dms_web/infos/delete/' + node.id
                     });
+                    $('#dg_reviewer').datagrid({
+                        url: '/vit_dms_web/reviewers/read/' + node.id
+                    });
                  }
              </script>
          </template>
@@ -126,7 +129,10 @@
                         <th field="partner" width="50"
                             data-options="
                                 formatter: function(value,row){
-                                    return row.partner[1];
+                                    if (row.partner)
+                                        return row.partner[1];
+                                    else
+                                        return '';
                                 },
                                 editor:{
                                     type:'combobox',
@@ -158,7 +164,22 @@
         </template>
 
         <template id="vit_dms_web.tab_reviewer">
-            reviewers
+            <table id="dg_reviewer" class="easyui-datagrid" style="width:100%;height:250px" data-options="singleSelect:true,collapsible:true,url:'',method:'get'">
+                <thead>
+                    <tr>
+                        <th data-options="field:'name'">Reviewer</th>
+                        <th data-options="field:'state',width:100">Status</th>
+                        <th data-options="field:'date'">Review Date</th>
+                    </tr>
+                </thead>
+            </table>
+            <script type="text/javascript">
+                $(function(){
+                    $('#dg_reviewer').datagrid({
+
+                    });
+                });
+            </script>
         </template>
 
 

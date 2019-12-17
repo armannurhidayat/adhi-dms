@@ -163,6 +163,16 @@ class VitDmsWeb(http.Controller):
         http.request.env['muk_dms.info'].browse(int(id)).unlink()
         return simplejson.dumps({'success': True})
 
+    ##### reviwer API ###########
+    @http.route('/vit_dms_web/reviewers/read/<int:file_id>', auth='public', csrf=False)
+    def reviewer_read(self, file_id, **kw):
+        reviewers=[]
+        domain=[('file_id','=', file_id)]
+        reviewers = http.request.env['muk_dms.reviewer'].search_read(domain)
+        return simplejson.dumps(reviewers)
+
+
+    ########## partner API
     @http.route('/vit_dms_web/partner', auth='public', csrf=False)
     def get_partner(self):
         partners = http.request.env['res.partner'].search_read([], fields=['id','name','display_name'])
