@@ -33,7 +33,7 @@ class muk_dms_review(models.Model):
 	_name = 'muk_dms.review'
 
 	name = fields.Char(string="Bookmark",)
-	tanggal_jam = fields.Date(string="Tanggal Jam", default=lambda self: time.strftime("%Y-%m-%d"))
+	tanggal_jam = fields.Datetime(string="Tanggal/ Jam", default=lambda self: time.strftime("%Y-%m-%d"))
 	redaksi_asal = fields.Char(string="Redaksi Asal",)
 	ulas = fields.Char(string="Ulasan",)
 	file_id = fields.Many2one(comodel_name='muk_dms.file', string='File')

@@ -98,10 +98,10 @@
             <table id="dg_review" style="width:100%;height:250px" toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
                 <thead>
                     <tr>
-                        <th field="tanggal_jam" width="50" editor="{type:'validatebox',options:{required:true}}">Date Time</th>
-                        <th field="name" width="50" editor="{type:'validatebox',options:{required:true}}">Bookmark</th>
-                        <th field="redaksi_asal" width="50" editor="{type:'validatebox',options:{required:true}}">Redaksi Asal</th>
-                        <th field="ulas" width="50" editor="{type:'validatebox',options:{required:true}}">Ulasan</th>
+                        <th field="tanggal_jam" width="150" editor="{type:'datetimebox',options:{required:true}}">Tanggal</th>
+                        <th field="name" width="150" editor="{type:'validatebox',options:{required:true}}">Bookmark</th>
+                        <th field="redaksi_asal" width="150" editor="{type:'validatebox',options:{required:true}}">Redaksi Asal</th>
+                        <th field="ulas" width="150" editor="{type:'validatebox',options:{required:true}}">Ulasan</th>
                     </tr>
                 </thead>
             </table>
@@ -125,7 +125,7 @@
                 <thead>
                     <tr>
                         <th field="name" width="50" editor="{type:'validatebox',options:{required:true}}">Nomor Naskah</th>
-                        <th field="tanggal_naskah" width="50" editor="{type:'validatebox',options:{required:true}}">Tanggal Naskah</th>
+                        <th field="tanggal_naskah" width="50" editor="{type:'datebox',options:{required:true}}">Tanggal Naskah</th>
                         <th field="partner" width="50"
                             data-options="
                                 formatter: function(value,row){
