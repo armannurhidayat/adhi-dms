@@ -1,6 +1,6 @@
 <openerp>
     <data>
-         <template id="vit_dms_web.index" name="index">
+        <template id="vit_dms_web.index" name="index">
             <t t-call="website.layout">
                 <h2>Document Management Systems</h2>
                 <p>View, Read, Review</p>
@@ -23,7 +23,7 @@
             </t>
          </template>
 
-         <template id="vit_dms_web.file_browser">
+        <template id="vit_dms_web.file_browser">
              <table id="tt" class="easyui-treegrid" style="width:100%;height:auto"
                             data-options="
                                 url: '/vit_dms_web/directories',
@@ -95,7 +95,7 @@
         </template>
 
         <template id="vit_dms_web.tab_review">
-            <table id="dg_review" title="Reviews" style="width:100%;height:250px" toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
+            <table id="dg_review" style="width:100%;height:250px" toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
                 <thead>
                     <tr>
                         <th field="tanggal_jam" width="50" editor="{type:'validatebox',options:{required:true}}">Date Time</th>
@@ -121,7 +121,7 @@
         </template>
 
         <template id="vit_dms_web.tab_infos">
-            <table id="dg_info" title="Infos" style="width:100%;height:250px" toolbar="#toolbar_info" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
+            <table id="dg_info" style="width:100%;height:250px" toolbar="#toolbar_info" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
                 <thead>
                     <tr>
                         <th field="name" width="50" editor="{type:'validatebox',options:{required:true}}">Nomor Naskah</th>

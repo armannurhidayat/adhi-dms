@@ -133,7 +133,7 @@ class VitDmsWeb(http.Controller):
             'deskripsi': deskripsi
         }
         new_id = http.request.env['muk_dms.info'].create(data)
-        data.update({'id': new_id.id})
+        data = http.request.env['muk_dms.info'].search_read([('id','=',new_id.id)])
         return simplejson.dumps(data)
 
     @http.route('/vit_dms_web/infos/update/<int:file_id>', auth='public', csrf=False)
