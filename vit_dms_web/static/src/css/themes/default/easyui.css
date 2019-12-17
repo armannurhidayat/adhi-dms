@@ -1926,6 +1926,7 @@
   -moz-border-radius: 0 0 0 0;
   -webkit-border-radius: 0 0 0 0;
   border-radius: 0 0 0 0;
+  background-color: #eee;
 }
 .datagrid-view .validatebox-invalid {
   border-color: #ffa8a8;

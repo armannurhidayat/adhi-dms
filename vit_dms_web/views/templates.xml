@@ -126,7 +126,6 @@
                         <th field="partner" width="50"
                             data-options="
                                 formatter: function(value,row){
-                                    console.log(row);
                                     return row.partner[1];
                                 },
                                 editor:{
