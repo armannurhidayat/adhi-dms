@@ -53,7 +53,7 @@ class VitDmsWeb(http.Controller):
 
         return simplejson.dumps(data)
 
-
+    ##### review API
     @http.route('/vit_dms_web/reviews/read/<int:file_id>', auth='public', csrf=False)
     def review_read(self, file_id, **kw):
         reviews=[]
@@ -107,3 +107,64 @@ class VitDmsWeb(http.Controller):
         id = kw.get('id')
         http.request.env['muk_dms.review'].browse(int(id)).unlink()
         return simplejson.dumps({'success': True})
+
+    ##### info API ###########
+    @http.route('/vit_dms_web/infos/read/<int:file_id>', auth='public', csrf=False)
+    def info_read(self, file_id, **kw):
+        infos=[]
+        domain=[('file_id','=', file_id)]
+        infos = http.request.env['muk_dms.info'].search_read(domain)
+        return simplejson.dumps(infos)
+
+    @http.route('/vit_dms_web/infos/create/<int:file_id>', auth='public', csrf=False)
+    def info_create(self, file_id, **kw):
+        print kw
+        isNewRecord = kw.get('isNewRecord')
+        name = kw.get('name')
+        tanggal_naskah = kw.get('tanggal_naskah')
+        partner = kw.get('partner')
+        deskripsi = kw.get('deskripsi')
+
+        data = {
+            'file_id':file_id,
+            'tanggal_naskah': tanggal_naskah,
+            'name': name,
+            'partner': partner,
+            'deskripsi': deskripsi
+        }
+        new_id = http.request.env['muk_dms.info'].create(data)
+        data.update({'id': new_id.id})
+        return simplejson.dumps(data)
+
+    @http.route('/vit_dms_web/infos/update/<int:file_id>', auth='public', csrf=False)
+    def info_update(self, file_id, **kw):
+        print kw
+        isNewRecord = kw.get('isNewRecord')
+        name = kw.get('name')
+        tanggal_naskah = kw.get('tanggal_naskah')
+        partner = kw.get('partner')
+        deskripsi = kw.get('deskripsi')
+        id = kw.get('id')
+
+        data = {
+            'tanggal_naskah': tanggal_naskah,
+            'name': name,
+            'partner': partner,
+            'deskripsi': deskripsi
+        }
+        updated_id = http.request.env['muk_dms.info'].browse(int(id)).write(data)
+        data.update({'id':updated_id})
+        return simplejson.dumps(data)
+
+    @http.route('/vit_dms_web/infos/delete/<int:file_id>', auth='public', csrf=False)
+    def info_delete(self, **kw):
+        print kw
+        id = kw.get('id')
+        http.request.env['muk_dms.info'].browse(int(id)).unlink()
+        return simplejson.dumps({'success': True})
+
+    @http.route('/vit_dms_web/partner', auth='public', csrf=False)
+    def get_partner(self):
+        partners = http.request.env['res.partner'].search_read([], fields=['id','name','display_name'])
+        return simplejson.dumps(partners)
+

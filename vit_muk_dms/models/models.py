@@ -49,8 +49,8 @@ class muk_dms_reviewer(models.Model):
 class muk_dms_info(models.Model):
 	_name = 'muk_dms.info'
 
-	name = fields.Char(string="Nomor Naskah")
-	tanggal_naskah = fields.Date(string="Tanggal Naskah", default=lambda self: time.strftime("%Y-%m-%d"))
-	partner = fields.Many2one(comodel_name="res.partner", string="Redaksi Asal")
-	deskripsi = fields.Char(string="Deskripsi Naskah")
-	file_id = fields.Many2one(comodel_name='muk_dms.file', string='File')
+	name 			= fields.Char(string="Nomor Naskah")
+	tanggal_naskah 	= fields.Date(string="Tanggal Naskah", default=lambda self: time.strftime("%Y-%m-%d"))
+	partner 		= fields.Many2one(comodel_name="res.partner", string="Partner")
+	deskripsi 		= fields.Char(string="Deskripsi Naskah")
+	file_id 		= fields.Many2one(comodel_name='muk_dms.file', string='File')
