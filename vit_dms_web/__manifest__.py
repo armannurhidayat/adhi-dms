@@ -32,6 +32,7 @@
         'views/asset.xml',
         'views/views.xml',
         'views/templates.xml',
+        'data/website_menu.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
